@@ -1,0 +1,120 @@
+{
+	"name": "vscode-dotnet-sdk",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dotnet/vscode-dotnet-runtime.git"
+	},
+	"bugs": {
+		"url": "https://github.com/dotnet/vscode-dotnet-runtime/issues"
+	},
+	"license": "MIT",
+	"author": "Microsoft Corporation",
+	"displayName": ".NET Education Bundle SDK Install Tool",
+	"description": "Allows acquisition of the .NET SDK.",
+	"appInsightsKey": "02dc18e0-7494-43b2-b2a3-18ada5fcb522",
+	"icon": "images/dotnetIcon.png",
+	"version": "0.8.0",
+	"publisher": "ms-dotnettools",
+	"engines": {
+		"vscode": "^1.41.0"
+	},
+	"preview": true,
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		".NET",
+		".NET Core",
+		"dotnet",
+		".NET SDK"
+	],
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": true
+		},
+		"virtualWorkspaces": true
+	},
+	"activationEvents": [
+		"onCommand:dotnet-sdk.acquire",
+		"onCommand:dotnet-sdk.acquireStatus",
+		"onCommand:dotnet-sdk.uninstallAll",
+		"onCommand:dotnet-sdk.showAcquisitionLog",
+		"onCommand:dotnet-sdk.reportIssue"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "dotnet-sdk.reportIssue",
+				"title": "Report an issue with the .NET Education Bundle SDK Install Tool.",
+				"category": ".NET Education Bundle SDK Install Tool"
+			}
+		],
+		"configuration": {
+			"title": ".NET Education Bundle SDK Install Tool",
+			"properties": {
+				"dotnetSDKAcquisitionExtension.enableTelemetry": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable Telemetry for the .NET Education Bundle SDK Install Tool."
+				},
+				"dotnetSDKAcquisitionExtension.installTimeoutValue": {
+					"type": "number",
+					"default": 300,
+					"description": "Timeout for installing .NET SDK in seconds."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile-all && npm install && webpack --mode production",
+		"vscode:uninstall": "node ./dist/ExtensionUninstall",
+		"compile": "npm run clean && tsc -p ./",
+		"watch": "npm run compile && tsc -watch -p ./",
+		"test": "npm run compile --silent && node ./dist/test/functional/runTest.js",
+		"clean": "rimraf dist",
+		"compile-all": "cd ../vscode-dotnet-runtime-library && npm install && npm run compile && cd ../vscode-dotnet-sdk-extension && npm install && npm run compile",
+		"lint": "tslint -c ../tslint.json '../vscode-dotnet-runtime-library/src/**/*.ts' '../vscode-dotnet-sdk-extension/src/**/*.ts'",
+		"webpack": "webpack --mode development"
+	},
+	"dependencies": {
+		"@types/chai": "^4.2.7",
+		"@types/chai-as-promised": "^7.1.2",
+		"@types/mocha": "^8.0.3",
+		"@types/node": "12.0.0",
+		"@types/rimraf": "2.0.2",
+		"@types/vscode": "^1.41.0",
+		"chai": "^4.2.0",
+		"chai-as-promised": "^7.1.1",
+		"child_process": "^1.0.2",
+		"diff": ">=3.5.0",
+		"glob": "^7.1.5",
+		"hmac-drbg": "^1.0.1",
+		"is-online": "^8.2.1",
+		"mocha": "^8.1.3",
+		"open": "^7.0.2",
+		"rimraf": "2.6.3",
+		"shelljs": "^0.8.3",
+		"ts-loader": "^6.2.1",
+		"tslint": "^5.20.1",
+		"typescript": "3.4.5",
+		"vscode-dotnet-runtime-library": "file:../vscode-dotnet-runtime-library",
+		"vscode-test": "^1.3.0"
+	},
+	"devDependencies": {
+		"copy-webpack-plugin": "^6.1.1",
+		"webpack": "5.23.0",
+		"webpack-cli": "4.5.0"
+	},
+	"__metadata": {
+		"id": "bdf86aba-ad9d-4593-b780-5829a4423823",
+		"publisherId": "d05e23de-3974-4ff0-8d47-23ee77830092",
+		"publisherDisplayName": "Microsoft",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1676667680198,
+		"preRelease": false
+	}
+}
